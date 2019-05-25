@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Bookmall
+{% endblock %}
+
+
+{% block body %}
+
+ 	<h3> {{ booker.title }}  </h3>
+ 	<h3> {{ booker.author }}  </h3>
+ 	<h3> {{ booker.location }}  </h3>
+
+<p>Posted by {{ booker.bookman }} </p>
+ 
+{% endblock %}

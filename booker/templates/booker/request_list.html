@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Request List{% endblock %}
+
+{% block body %}
+ 
+  {% if bookrequest_list %}
+   <h3>Your Book Request List</h3>
+   <br>
+   <br>
+    <ol>
+ {% for book in bookrequest_list %}
+
+ 	<li>{{ book }}</li>
+
+
+ {% endfor %}
+  </ol>
+ {% else %}
+ <p>You have no requests yet</p>
+ <p>Will you like to place a request now?</p>
+ <a href="{% url 'booker:request_book' %}">Place a Request</a>
+ {% endif %}
+ <br>
+ <br>
+ <a href="{% url 'booker:request_book' %}">Place Book Request</a>
+
+{% endblock %}

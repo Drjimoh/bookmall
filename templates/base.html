@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>
+		{% block title %}
+		{% endblock %}
+	</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" 
+	href="{% static 'booker/css/style.css' %}">
+	<style type="text/css">
+		.navbar-brand{
+			display: inline-flex !important;
+			list-style: none !important;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="container">
+		<nav class="navbar navbar-light bg-light">
+			<a class="navbar-brand" href="#">BookMall developed by Dev Jimoh</a>
+			<ul class="navbar-brand" >
+				<li class="navbar-item"><a class="nav-link"href='{% url "booker:index" %}'>BookMall</a>
+					
+				</li>
+				{% if request.user.is_authenticated %}
+				<li class="navbar-item">
+					<a class="nav-link" href="{% url 'booker:request_list' %}">Your Request List</a>
+				</li>
+				<li class="navbar-item">
+					<a class="nav-link" href="{% url 'booker:offer_list' %}">Your Offer List</a> 
+				</li>
+				<li class="navbar-item">
+				
+					<a class="nav-link" href="{% url 'logout' %}">Logout</a>
+			
+				</li>
+				{% else %}
+				<li class="navbar-item">
+					<a class="nav-link" href="{% url 'login' %}">Login</a>
+				</li>
+				<li class="navbar-item">
+					<a class="nav-link" href="{% url 'accounts:signup' %}">Sign up to Request</a>
+				</li>
+				
+				{% endif %}
+			</ul>
+		</nav>
+		
+
+	</div>
+	<div class="container" style="float: right; padding-top: 50px;">
+				{% block body %}
+
+		{% endblock %}
+	</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Sign up 
+{% endblock %}
+
+{% block body %}
+<h1>Sign up today to Start Requesting for books</h1>
+<form method="post" action="{% url 'booker:signup_success' %}">
+	{% csrf_token %}
+	{{ form }}
+	<input type="submit" value='submit' name="Sign up">
+</form>
+{% endblock %}

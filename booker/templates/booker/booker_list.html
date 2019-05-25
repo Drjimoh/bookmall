@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+Bookmall
+
+{% endblock %}
+
+{% block body %}
+The list of books on request:
+<ul>
+	{% for book in booker_list %}
+ 	<li><a href="{% url 'booker:detail' pk=book.id %}" > {{ book }} </a> </li>
+ 	{% endfor %}	
+</ul>
+ 
+{% endblock %}

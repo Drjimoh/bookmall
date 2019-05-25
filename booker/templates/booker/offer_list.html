@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Request List{% endblock %}
+
+{% block body %}
+ 
+  {% if booker_list %}
+   <h3>Your Offer List</h3>
+   <br>
+   <br>
+   <ol>
+ {% for book in booker_list %}
+ <li> {{ book }}</li>
+ {% endfor %}
+</ol>
+ {% else %}
+ <h3>You have no book offer yet</h3>
+ {% endif %}
+
+{% endblock %}
