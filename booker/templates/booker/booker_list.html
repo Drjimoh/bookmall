@@ -5,11 +5,25 @@ Bookmall
 {% endblock %}
 
 {% block body %}
-The list of books on request:
-<ul>
-	{% for book in booker_list %}
- 	<li><a href="{% url 'booker:detail' pk=book.id %}" > {{ book }} </a> </li>
- 	{% endfor %}	
-</ul>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6">
+				The list of books on request:
+				<ul>
+					{% for book in book_requests %}
+				 	<li><a href="{% url 'booker:request_detail' pk=book.id %}" > {{ book }} </a> </li>
+				 	{% endfor %}	
+				</ul>
+
+		</div>
+		<div class="col-sm-6">
+				The list of books currently offered:
+				<ul>
+					{% for book in book_offers %}
+				 	<li><a href="{% url 'booker:offer_detail' pk=book.id %}" > {{ book }} </a> </li>
+				 	{% endfor %}	
+				</ul>
+		</div>
+</div>
  
 {% endblock %}

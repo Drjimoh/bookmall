@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>
 		{% block title %}
 		{% endblock %}
@@ -15,40 +16,67 @@
 			display: inline-flex !important;
 			list-style: none !important;
 		}
+
+		ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: grey;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #111;}
+
+ul.topnav li a.active {background-color: blue;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+}
 	</style>
 </head>
 <body>
 
 	<div class="container">
-		<nav class="navbar navbar-light bg-light">
-			<a class="navbar-brand" href="#">BookMall developed by Dev Jimoh</a>
-			<ul class="navbar-brand" >
-				<li class="navbar-item"><a class="nav-link"href='{% url "booker:index" %}'>BookMall</a>
+		
+			<ul class="topnav" >
+				<li><a class="nav-link"href='{% url "booker:index" %}'>Home</a>
 					
 				</li>
 				{% if request.user.is_authenticated %}
-				<li class="navbar-item">
+				<li>
 					<a class="nav-link" href="{% url 'booker:request_list' %}">Your Request List</a>
 				</li>
-				<li class="navbar-item">
+				<li>
 					<a class="nav-link" href="{% url 'booker:offer_list' %}">Your Offer List</a> 
 				</li>
-				<li class="navbar-item">
+				<li >
 				
 					<a class="nav-link" href="{% url 'logout' %}">Logout</a>
 			
 				</li>
 				{% else %}
-				<li class="navbar-item">
+				<li >
 					<a class="nav-link" href="{% url 'login' %}">Login</a>
 				</li>
-				<li class="navbar-item">
+				<li >
 					<a class="nav-link" href="{% url 'accounts:signup' %}">Sign up to Request</a>
 				</li>
 				
 				{% endif %}
 			</ul>
-		</nav>
 		
 
 	</div>

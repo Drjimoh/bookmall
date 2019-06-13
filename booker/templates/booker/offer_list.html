@@ -13,8 +13,17 @@
  <li> {{ book }}</li>
  {% endfor %}
 </ol>
+ <br>
+ <br>
+ <p>Will you like to Offer another Book now?</p>
+ <a href="{% url 'booker:offer_book' %}">Offer another Book</a>
  {% else %}
  <h3>You have no book offer yet</h3>
+ <p>You have no requests yet</p>
+ <br>
+ <br>
+ <p>Will you like to Offer a Book now?</p>
+ <a href="{% url 'booker:offer_book' %}">Offer a Book</a>
  {% endif %}
 
 {% endblock %}

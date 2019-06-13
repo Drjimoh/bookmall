@@ -12,11 +12,11 @@ class Booker(models.Model):
 	location = models.CharField(max_length=100, blank=False, null=False, 
 		default='Nigeria')
 
-
 	def __str__(self):
 		return str(self.title) + ' by ' + str(self.author)
 
 class BookRequest(models.Model):
+	id = models.IntegerField(primary_key=True, editable=False)
 	bookman = models.ForeignKey(to=settings.AUTH_USER_MODEL,
 		on_delete=models.SET_NULL, null=True, default=1)
 	title = models.CharField(max_length=200, null=False, blank=False)
