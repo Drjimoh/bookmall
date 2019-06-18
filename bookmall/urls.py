@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('booker.urls', namespace='booker')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
 ]

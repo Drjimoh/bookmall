@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Success{% endblock %}
+
+{% block body %}
+This book has been deleted successfully.
+
+<h3>Your Request List</h3>
+   <br>
+   <br>
+   <ol>
+ {% for book in books %}
+ <li> {{ book }}</li>
+ <p><a href="{% url 'booker:delete_requested_book' pk=book.id %}"> Delete book </a> </p>
+ <br>
+ {% endfor %}
+
+ <a href="{% url 'booker:request_book' %}">Request another book </a>
+{% endblock %}

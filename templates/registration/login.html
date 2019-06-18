@@ -11,4 +11,9 @@ Login
 	{{ form.as_p }}
 	<button type="submit">Login</button>
 </form>
+<br>
+<br>
+<p><strong>-- OR --</strong></p>
+
+  <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
 {% endblock %}

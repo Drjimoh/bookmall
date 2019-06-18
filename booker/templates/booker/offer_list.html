@@ -10,12 +10,13 @@
    <br>
    <ol>
  {% for book in booker_list %}
- <li> {{ book }}</li>
+ <li><a href="{% url 'booker:offer_detail' pk=book.id %}" /> {{ book }}</li>
+
+ <br>
  {% endfor %}
 </ol>
  <br>
  <br>
- <p>Will you like to Offer another Book now?</p>
  <a href="{% url 'booker:offer_book' %}">Offer another Book</a>
  {% else %}
  <h3>You have no book offer yet</h3>

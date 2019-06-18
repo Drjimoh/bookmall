@@ -21,11 +21,13 @@ class Homepage(generic.ListView):
 		return Booker.objects.all()
 
 
+
+
 class RequestedBookView(generic.DetailView):
-	model = Booker 
+	model = BookRequest 
 
 class OfferedBookView(generic.DetailView):
-	model = BookRequest
+	model = Booker
 
 
 	
@@ -120,3 +122,25 @@ class BookRequestApiView(APIView):
 				status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, 
 			status=status.HTTP_400_BAD_REQUEST)
+
+
+def delete_offered_book(request, pk):
+	book = Booker.objects.get(id=pk)
+	book.delete()
+
+	book_list = Booker.objects.filter(
+			bookman=request.user
+			)
+	return render(request, 
+		'booker/offered_book_deleted.html',
+			 {'books':book_list})
+
+def delete_requested_book(request, pk):
+	book = BookRequest.objects.get(id=pk)
+	book.delete()
+	book_list = BookRequest.objects.filter(
+			bookman=request.user
+			)
+	return render(request, 
+		'booker/requested_book_deleted.html',
+			 {'books':book_list})

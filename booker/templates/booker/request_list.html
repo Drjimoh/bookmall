@@ -11,7 +11,8 @@
     <ol>
  {% for book in bookrequest_list.reverse %}
 
- 	<li>{{ book }}</li>
+<li><a href="{% url 'booker:request_detail' pk=book.id %}" /> {{ book }}</li>
+
 
  {% endfor %}
   </ol>

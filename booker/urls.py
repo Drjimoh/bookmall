@@ -28,4 +28,9 @@ urlpatterns = [
 		name='booker_api'),
 	path('bookrequest/api', login_required(views.BookRequestApiView.as_view()),
 		name='bookrequest_api'),
+
+	path('<int:pk>/delete/request', views.delete_requested_book, 
+		name='delete_requested_book'),
+	path('<int:pk>/delete/offer', views.delete_offered_book,
+		name= 'delete_offered_book'),
     ]

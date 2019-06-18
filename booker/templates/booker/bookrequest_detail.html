@@ -12,4 +12,8 @@ Bookmall
  	<h3> {{ bookrequest.location }}  </h3>
 
 <p>Posted by {{ bookrequest.bookman }} </p>
+{% if bookrequest.bookman == request.user %}
+ <p><a href="{% url 'booker:delete_requested_book' pk=bookrequest.id %}"> Delete book </a> </p>
+ <br>
+{% endif %} 
 {% endblock %}
