@@ -17,9 +17,9 @@ class Booker(models.Model):
 	price = models.CharField(choices=offer_type, max_length=100, default='Free')
 	location = models.CharField(max_length=100, blank=False, null=False, 
 		default='Nigeria')
-
 	def __str__(self):
 		return str(self.title) + ' by ' + str(self.author)
+
 
 class BookRequest(models.Model):
 	id = models.IntegerField(primary_key=True, editable=False)
@@ -28,9 +28,7 @@ class BookRequest(models.Model):
 	title = models.CharField(max_length=200, null=False, blank=False)
 	author = models.CharField(max_length=100, null= False, blank=False)
 	location = models.CharField(max_length=100, null=False, blank=False)
-
 	def __str__(self):
 		return str(self.title) + ' by ' + str(self.author)
 
 		
-

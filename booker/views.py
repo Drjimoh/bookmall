@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.views import generic 
 from booker.models import Booker, BookRequest
 from booker.forms import BookRequestForm, BookOfferForm
@@ -12,24 +12,21 @@ from booker.serializers import BookerSerializer, BookRequestSerializer
 from rest_framework import status
 from django.contrib.auth.models import User 
 from django.http import HttpResponseRedirect
+from django.db.models import Q 
 
-class Homepage(generic.ListView):
+
+'''class Homepage(generic.ListView):
 	model = Booker 
 	requests = list(BookRequest.objects.all())
 	context = {'requests':requests}
 	def  get_queryset(self):
-		return Booker.objects.all()
-
-
-
+		return Booker.objects.all()'''
 
 class RequestedBookView(generic.DetailView):
 	model = BookRequest 
 
 class OfferedBookView(generic.DetailView):
 	model = Booker
-
-
 	
 class OfferListView(generic.ListView):
 	model = Booker
@@ -40,12 +37,9 @@ class OfferListView(generic.ListView):
 			bookman=self.request.user
 			)
 
-
-
 class RequestListView(generic.ListView):
 	model = BookRequest
 	template_name = 'booker/request_list.html'
-	#@login_required()
 	def get_queryset(self, *args, **kwargs):
 		return BookRequest.objects.filter(
 			bookman=self.request.user
@@ -80,9 +74,31 @@ class BookOfferView(generic.CreateView):
 def index(request):
 	book_requests = list(BookRequest.objects.all())[::-1]
 	book_offers = list(Booker.objects.all())[::-1]
+	query = request.GET.get('offerbook', '')
+	requestquery = request.GET.get('requestbook', '')
+	if query:
+		qset = (
+			Q(title__contains=query) |
+			Q(author__icontains=query) |
+			Q(location__icontains=query) |
+			Q(price__icontains=query)
+			)
+		results = Booker.objects.filter(qset).distinct()
+	elif requestquery:
+		qset = (
+			Q(title__contains=requestquery) |
+			Q(author__icontains=requestquery) |
+			Q(location__icontains=requestquery) 
+			)
+		results = BookRequest.objects.filter(qset).distinct()
+	else:
+		results = []
+
+
 	return render(request, 
 		'booker/booker_list.html',
-		 {'book_requests':book_requests, 'book_offers':book_offers})
+		 {'book_requests':book_requests, 'book_offers':book_offers,
+		 'results':results, 'query':query, 'requestquery':requestquery,})
 	
 
 @login_required
@@ -144,3 +160,20 @@ def delete_requested_book(request, pk):
 	return render(request, 
 		'booker/requested_book_deleted.html',
 			 {'books':book_list})
+
+
+def search_offered_books(request):
+	query = request.GET.get('book', '')
+	if query:
+		qset = (
+			Booker(title__icontains=query) |
+			Booker(author__icontains=query) |
+			Booker(location__icontains=query) |
+			Booker(price__icontains=query)
+			)
+		results = Booker.objects.filter(qset).distinct()
+	else:
+		request = []
+
+	return render_to_response('booker/search_offered.html',
+		{'results': results, 'query': query})

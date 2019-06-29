@@ -7,10 +7,10 @@ Bookmall
 
 {% block body %}
 
- 	<h3> {{ booker.title }}  </h3>
- 	<h3> {{ booker.author }}  </h3>
- 	<h3> {{ booker.location }}  </h3>
-
+ 	<h4> Book title: {{ booker.title }}  </h4>	
+ 	<h4>Author: {{ booker.author }}  </h4>
+ 	<h4>Location: {{ booker.location }}  </h4>
+<br>
 <p>Posted by {{ booker.bookman }} </p>
  {% if booker.bookman == request.user %}
  <p><a href="{% url 'booker:delete_offered_book' pk=booker.id %}"> Delete book </a> </p>
